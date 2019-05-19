@@ -2,19 +2,22 @@ var path = require('path');
 
 module.exports = {
     output: {
-        filename: "./[name]/bundle.js"
+        filename: "./[name]/bundle.js",
+        
     },
     entry: {
-        demo1: "./input/demo.js",
-        modal: "./modal/demo.js",
-        hoc: "./hoc/demo.js",
+        input:  ["./input/demo.js"],
+        modal:  ["./modal/demo.js"],
+        hoc:    ["./hoc/demo.js"],
+        parent: ["./parent/demo.js"]
     },
+    devtool:"source-map",
     module: {
         loaders: [
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel',
+                loader: 'babel-loader',
                 query: {
                     presets: ['es2015', 'react']
                 }
@@ -22,11 +25,12 @@ module.exports = {
             {
                 test: /\.scss$/,
                 exclude: /node_modules/,
-                loaders: ["style", "css", "sass"]
+                loaders: ["style-loader", "css-loader", "sass-loader"]
             }
         ]
     },
-    webserver: {
+    devServer: {
+        contentBase: [path.join(__dirname, "./hoc")],
         hot: true
-    },
+    }
 };

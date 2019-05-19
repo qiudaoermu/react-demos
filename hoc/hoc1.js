@@ -4,6 +4,7 @@ export default (WrappedComp) => {
         constructor(props) {
             super(props);
             this.timer = null;
+            console.log(this.props)
         }
 
         componentWillMount() {
@@ -16,7 +17,6 @@ export default (WrappedComp) => {
                 this.timer = null;
             }
         }
-
         render() {
             return <WrappedComp {...this.props} />;
         }
